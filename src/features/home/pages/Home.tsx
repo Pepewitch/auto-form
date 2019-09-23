@@ -1,7 +1,11 @@
 import React from "react";
-import { useSize } from "features/size/useSize";
+import { FormList } from "features/form-list/pages/FormList";
+import { Navigation } from "features/navigation/Navigation";
 
 export const Home = () => {
-  const size = useSize();
-  return <div>Home {size}</div>;
+  return (
+    <>
+      <FormList />
+    </>
+  );
 };

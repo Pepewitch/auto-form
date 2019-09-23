@@ -1,15 +1,13 @@
 import React from "react";
-import { Route, Redirect, Switch } from "react-router-dom";
 import "./App.css";
 import "antd/dist/antd.css";
-import { Login } from "features/auth/pages/Login";
-import { Home } from "features/home/pages/Home";
-import { configureStore } from "redux/store";
+import { store } from "redux/store";
 import { Router } from "react-router";
 import { Provider } from "react-redux";
 import { createBrowserHistory } from "history";
 import firebase from "firebase";
 import { ScreenSizeProvider } from "features/size/ScreenSizeProvider";
+import { Routes } from "features/routes/Routes";
 
 const history = createBrowserHistory();
 
@@ -24,17 +22,12 @@ const config = {
 };
 firebase.initializeApp(config);
 
-const store = configureStore();
 const App: React.FC = () => {
   return (
     <ScreenSizeProvider>
       <Provider store={store}>
         <Router history={history}>
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/login" component={Login} />
-            <Redirect to="/login" />
-          </Switch>
+          <Routes />
         </Router>
       </Provider>
     </ScreenSizeProvider>

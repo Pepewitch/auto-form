@@ -1,14 +1,18 @@
 import React, { createContext, useState, useEffect } from "react";
+import { MOBILE_BREAKPOINT, SIZE } from "./const";
 
-export const screenSizeContext = createContext(window.innerWidth);
+const getSize = () =>
+  window.innerWidth < MOBILE_BREAKPOINT ? SIZE.MOBILE : SIZE.DESKTOP;
+
+export const screenSizeContext = createContext(getSize());
 
 const { Provider } = screenSizeContext;
 
 export const ScreenSizeProvider = (props: any) => {
-  const [screenSize, setScreenSize] = useState(window.innerWidth);
+  const [screenSize, setScreenSize] = useState(getSize());
   useEffect(() => {
     const onResize = () => {
-      setScreenSize(window.innerWidth);
+      setScreenSize(getSize());
     };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
